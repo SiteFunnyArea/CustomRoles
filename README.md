@@ -1,5 +1,6 @@
 # CustomRoles
-==============
+> This plugin was originally made by Joker119, SiteFunnyArea is modifying it to add new custom roles for our server, aswell as making some small fixes. If you wish to modify our version of this plugin, please give credit to Joker119. The original plugin source code and download is [right here.](https://github.com/joker-119/CustomRoles)
+
 ## Description
 This plugin makes use of Exiled.CustomRoles to add new playable roles into the game. These roles have custom inventories, health, objectives and abilities.
 
