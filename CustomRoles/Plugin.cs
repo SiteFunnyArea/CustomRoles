@@ -25,13 +25,13 @@ public class Plugin : Plugin<Config>
 
     public List<Player> StopRagdollList { get; } = new ();
 
-    public override string Author { get; } = "Galaxy119";
+    public override string Author { get; } = "Joker119 | Modified by KadotCom and SiteFunnyArea";
 
     public override string Name { get; } = "CustomRoles";
 
-    public override string Prefix { get; } = "CustomRoles";
+    public override string Prefix { get; } = "CustomRolesSFA";
 
-    public override Version RequiredExiledVersion { get; } = new (5, 0, 0);
+    public override Version RequiredExiledVersion { get; } = new (7, 2, 0);
 
     public Methods Methods { get; private set; } = null!;
 
@@ -57,6 +57,7 @@ public class Plugin : Plugin<Config>
         Config.RoleConfigs.PdZombies.Register();
         Config.RoleConfigs.PlagueZombies.Register();
         Config.RoleConfigs.TankZombies.Register();
+        Config.RoleConfigs.FacilityGuardSupervisors.Register();
 
         foreach (CustomRole role in CustomRole.Registered)
         {

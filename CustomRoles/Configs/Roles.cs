@@ -1,6 +1,7 @@
 namespace CustomRoles.Configs;
 
 using System.Collections.Generic;
+using CustomItems_SFA.Roles;
 using CustomRoles.Roles;
 
 public class Roles
@@ -63,5 +64,9 @@ public class Roles
     public List<TankZombie> TankZombies { get; set; } = new()
     {
         new TankZombie(),
+    };
+    public List<FacilityGuardSupervisor> FacilityGuardSupervisors { get; set; } = new()
+    {
+        new FacilityGuardSupervisor(),
     };
 }
