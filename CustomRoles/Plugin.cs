@@ -31,7 +31,7 @@ public class Plugin : Plugin<Config>
 
     public override string Prefix { get; } = "CustomRolesSFA";
 
-    public override Version RequiredExiledVersion { get; } = new (7, 2, 0);
+    public override Version RequiredExiledVersion { get; } = new (8, 0, 0);
 
     public Methods Methods { get; private set; } = null!;
 
