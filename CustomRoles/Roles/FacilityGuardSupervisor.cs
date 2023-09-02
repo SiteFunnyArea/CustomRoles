@@ -2,6 +2,7 @@
 
 using CustomRoles.API;
 using Exiled.API.Enums;
+using Exiled.API.Features;
 using Exiled.API.Features.Attributes;
 using Exiled.API.Features.Spawn;
 using Exiled.CustomRoles.API.Features;
@@ -20,8 +21,14 @@ public class FacilityGuardSupervisor : CustomRole, ICustomRole
         public override string Name { get; set; } = "Facility Guard Supervisor";
         public override string Description { get; set; } = "Test";
         public override string CustomInfo { get; set; } = "Facility Guard Supervisor";
+
+    public List<RoleTypeId> BlockedRoles { get; set; } = new()
+    { 
+        RoleTypeId.NtfCaptain
+    };
         public StartTeam StartTeam { get; set; } = StartTeam.Guard;
         public int Chance { get; set; } = 100;
+    public override float SpawnChance { get; set; } = 100;
 
     public override SpawnProperties SpawnProperties { get; set; } = new()
     {
@@ -39,7 +46,7 @@ public class FacilityGuardSupervisor : CustomRole, ICustomRole
     public override RoleTypeId Role { get; set; } = RoleTypeId.FacilityGuard;
         public override List<string> Inventory { get; set; } = new() {
             $"{ItemType.GunCrossvec}",
-            $"{ItemType.KeycardNTFOfficer}",
+            $"{ItemType.KeycardMTFOperative}",
             $"{ItemType.Adrenaline}",
             $"{ItemType.Medkit}",
             $"{ItemType.Flashlight}",
@@ -51,4 +58,8 @@ public class FacilityGuardSupervisor : CustomRole, ICustomRole
                 AmmoType.Nato9, 75
                 },
         };
+    protected override void RoleAdded(Player player)
+    {
+        base.RoleAdded(player);
+    }
 }
