@@ -55,6 +55,9 @@ public class EventHandlers
 
         foreach (Player player in Player.List)
         {
+            if (API.API.ExemptPlayers.TryGetValue(player, out ExemptionType type) && type.HasFlag(ExemptionType.RoundStart))
+                continue;
+
             Log.Debug($"Trying to give {player.Nickname} a role | {player.Role.Type}");
             CustomRole? role = null;
             switch (player.Role.Type)
@@ -131,6 +134,8 @@ public class EventHandlers
         Log.Debug($"{nameof(FinishingRecall)}: Selecting random zombie role.");
         if (plugin.Roles.ContainsKey(StartTeam.Scp) && ev.Target is not null)
         {
+            if (API.API.ExemptPlayers.TryGetValue(ev.Target, out ExemptionType type) && type.HasFlag(ExemptionType.Revive))
+                return;
             Log.Debug($"{nameof(FinishingRecall)}: List count {plugin.Roles[StartTeam.Scp].Count}");
             List<ICustomRole>.Enumerator roles = plugin.Roles[StartTeam.Scp].GetEnumerator();
             CustomRole? role = Methods.GetCustomRole(ref roles, false, true);
