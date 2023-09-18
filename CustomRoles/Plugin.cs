@@ -58,7 +58,10 @@ public class Plugin : Plugin<Config>
         Config.RoleConfigs.PdZombies.Register();
         Config.RoleConfigs.PlagueZombies.Register();
         Config.RoleConfigs.TankZombies.Register();
-        Config.RoleConfigs.FacilityGuardSupervisors.Register();
+        Config.RoleConfigs.HammerDownCombatants.Register();
+        Config.RoleConfigs.Epsilon9FireEaters.Register();
+        Config.RoleConfigs.Beta7MazHattersCombatants.Register();
+        Config.RoleConfigs.Captains.Register();
 
         foreach (CustomRole role in CustomRole.Registered)
         {
@@ -86,6 +89,8 @@ public class Plugin : Plugin<Config>
                     team = StartTeam.ClassD;
                 else if (custom.StartTeam.HasFlag(StartTeam.Scp))
                     team = StartTeam.Scp;
+                else if (custom.StartTeam.HasFlag(StartTeam.Escape))
+                    team = StartTeam.Escape;
                 else
                     team = StartTeam.Other;
 
@@ -103,6 +108,7 @@ public class Plugin : Plugin<Config>
         ServerEvents.ReloadedConfigs += EventHandlers.OnReloadedConfigs;
         Scp049Events.FinishingRecall += EventHandlers.FinishingRecall;
         PlayerEvents.SpawningRagdoll += EventHandlers.OnSpawningRagdoll;
+        PlayerEvents.Escaping += EventHandlers.OnEscaping;
         base.OnEnabled();
     }
 
@@ -113,7 +119,6 @@ public class Plugin : Plugin<Config>
         ServerEvents.RoundStarted -= EventHandlers.OnRoundStarted;
         ServerEvents.RespawningTeam -= EventHandlers.OnRespawningTeam;
         ServerEvents.ReloadedConfigs -= EventHandlers.OnReloadedConfigs;
-
         base.OnDisabled();
     }
 }

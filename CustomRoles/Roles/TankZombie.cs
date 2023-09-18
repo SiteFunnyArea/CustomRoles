@@ -16,7 +16,7 @@ using PlayerStatsSystem;
 [CustomRole(RoleTypeId.Scp0492)]
 public class TankZombie : CustomRole, ICustomRole
 {
-    public int Chance { get; set; } = 10;
+    public int Chance { get; set; } = 0;
 
     public StartTeam StartTeam { get; set; } = StartTeam.Scp | StartTeam.Revived;
 

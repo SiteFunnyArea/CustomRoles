@@ -15,7 +15,7 @@ using UnityEngine;
 [CustomRole(RoleTypeId.Scp0492)]
 public class DwarfZombie : CustomRole, ICustomRole
 {
-    public int Chance { get; set; } = 20;
+    public int Chance { get; set; } = 0;
 
     public StartTeam StartTeam { get; set; } = StartTeam.Scp | StartTeam.Revived;
 

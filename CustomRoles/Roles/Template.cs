@@ -1,6 +1,5 @@
 namespace CustomRoles.Roles;
 
-using CustomRoles.Abilities;
 using CustomRoles.API;
 
 using Exiled.API.Features;
@@ -14,26 +13,26 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CustomRole(RoleTypeId.None)]
-public class Dwarf : CustomRole, ICustomRole
+public class Template : CustomRole, ICustomRole
 {
-    public int Chance { get; set; } = 100;
+    public int Chance { get; set; } = 0;
 
     public StartTeam StartTeam { get; set; } = StartTeam.ClassD;
 
-    public override uint Id { get; set; } = 5;
+    public override uint Id { get; set; } = 9000;
 
     public override RoleTypeId Role { get; set; } = RoleTypeId.None;
 
-    public override int MaxHealth { get; set; } = 80;
+    public override int MaxHealth { get; set; } = 100;
 
-    public override string Name { get; set; } = "Dwarf";
+    public override string Name { get; set; } = "Test";
 
     public override string Description { get; set; } =
-        "A normal player who has unlimited stamina, and is slightly smaller than normal.";
+        "Test";
 
-    public override string CustomInfo { get; set; } = "Dwarf";
+    public override string CustomInfo { get; set; } = "Test";
 
-    public override bool KeepInventoryOnSpawn { get; set; } = true;
+    public override bool KeepInventoryOnSpawn { get; set; } = false;
 
     public override bool KeepRoleOnDeath { get; set; } = true;
 
@@ -44,7 +43,10 @@ public class Dwarf : CustomRole, ICustomRole
         Limit = 1,
     };
 
-    public override List<CustomAbility>? CustomAbilities { get; set; } = new() {};
+    public override List<string> Inventory { get; set; } = new()
+    {
+        ItemType.AntiSCP207.ToString(),
+    };
 
     protected override void RoleAdded(Player player)
     {

@@ -3,7 +3,7 @@ namespace CustomRoles.Roles;
 using System.Collections.Generic;
 using CustomRoles.Abilities;
 using CustomRoles.API;
-
+using Exiled.API.Features;
 using Exiled.API.Features.Attributes;
 using Exiled.API.Features.Spawn;
 using Exiled.CustomRoles.API.Features;
@@ -13,12 +13,11 @@ using PlayerRoles;
 [CustomRole(RoleTypeId.Scp0492)]
 public class BallisticZombie : CustomRole, ICustomRole
 {
-    public int Chance { get; set; } = 25;
+    public int Chance { get; set; } = 0;
 
     public StartTeam StartTeam { get; set; } = StartTeam.Scp | StartTeam.Revived;
 
     public override uint Id { get; set; } = 1;
-
     public override RoleTypeId Role { get; set; } = RoleTypeId.Scp0492;
 
     public override int MaxHealth { get; set; } = 500;

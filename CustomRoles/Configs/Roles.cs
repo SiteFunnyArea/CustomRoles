@@ -1,7 +1,6 @@
 namespace CustomRoles.Configs;
 
 using System.Collections.Generic;
-using CustomItems_SFA.Roles;
 using CustomRoles.Roles;
 
 public class Roles
@@ -65,8 +64,24 @@ public class Roles
     {
         new TankZombie(),
     };
-    public List<FacilityGuardSupervisor> FacilityGuardSupervisors { get; set; } = new()
+    public List<HammerDownCombatant> HammerDownCombatants { get; set; } = new()
     {
-        new FacilityGuardSupervisor(),
+        new HammerDownCombatant(),
     };
+
+    public List<Epsilon9FireEater> Epsilon9FireEaters { get; set; } = new()
+    {
+        new Epsilon9FireEater(),
+    };
+
+    public List<Beta7MazHattersCombatant> Beta7MazHattersCombatants { get; set; } = new()
+    {
+        new Beta7MazHattersCombatant(),
+    };
+
+    public List<Captain> Captains { get; set; } = new()
+    {
+        new Captain(),
+    };
+
 }

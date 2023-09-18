@@ -28,7 +28,7 @@ public class PlagueZombie : CustomRole, ICustomRole
     [YamlIgnore]
     public static List<ushort> Grenades { get; } = new ();
 
-    public int Chance { get; set; } = 40;
+    public int Chance { get; set; } = 0;
 
     public StartTeam StartTeam { get; set; } = StartTeam.Scp | StartTeam.Revived;
 

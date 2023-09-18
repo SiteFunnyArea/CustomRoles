@@ -6,6 +6,7 @@ using CustomRoles.API;
 
 using Exiled.API.Enums;
 using Exiled.API.Features;
+using Exiled.API.Features.Items;
 using Exiled.CustomRoles.API;
 using Exiled.CustomRoles.API.Features;
 using Exiled.Events.EventArgs.Player;
@@ -72,7 +73,9 @@ public class EventHandlers
                     break;
             }
 
-            role?.AddRole(player);
+            uint? limit = (uint)(role?.SpawnProperties.Limit - 1);
+            if (role?.TrackedPlayers.Count <= limit)
+                role?.AddRole(player);
         }
 
         guardRoles.Dispose();
@@ -109,8 +112,10 @@ public class EventHandlers
         foreach (Player player in ev.Players)
         {
             CustomRole? role = Methods.GetCustomRole(ref roles);
-
-            role?.AddRole(player);
+            uint? limit = (uint)(role?.SpawnProperties.Limit - 1);
+            if (role?.TrackedPlayers.Count <= limit)
+                role?.AddRole(player);
+            
         }
 
         roles.Dispose();
@@ -131,8 +136,30 @@ public class EventHandlers
             CustomRole? role = Methods.GetCustomRole(ref roles, false, true);
 
             Log.Debug($"Got custom role {role?.Name}");
-            if (ev.Target.GetCustomRoles().Count == 0)
-                role?.AddRole(ev.Target);
+            uint? limit = (uint)(role?.SpawnProperties.Limit - 1);
+            if (role?.TrackedPlayers.Count <= limit)
+              role?.AddRole(ev.Target);
+           
+
+            roles.Dispose();
+        }
+    }
+
+    public void OnEscaping(EscapingEventArgs ev)
+    {
+        Log.Debug($"{nameof(OnEscaping)}: Selecting random escapee role.");
+        if (plugin.Roles.ContainsKey(StartTeam.Escape))
+        {
+            Log.Debug($"{nameof(OnEscaping)}: List count {plugin.Roles[StartTeam.Escape].Count}");
+            List<ICustomRole>.Enumerator roles = plugin.Roles[StartTeam.Escape].GetEnumerator();
+            CustomRole? role = Methods.GetCustomRole(ref roles, true, false);
+
+            Log.Debug($"Got custom role {role?.Name}");
+            uint? limit = (uint)(role?.SpawnProperties.Limit - 1);
+            if (role?.TrackedPlayers.Count <= limit)
+                role?.AddRole(ev.Player);
+
+
             roles.Dispose();
         }
     }
