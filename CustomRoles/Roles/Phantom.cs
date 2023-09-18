@@ -16,6 +16,7 @@ using PlayerRoles;
 public class Phantom : CustomRole, ICustomRole
 {
     public int Chance { get; set; } = 0;
+    public RoleTypeId RoleToBe { get; set; } = RoleTypeId.ChaosConscript;
 
     public StartTeam StartTeam { get; set; } = StartTeam.Guard;
 

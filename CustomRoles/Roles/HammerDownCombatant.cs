@@ -25,6 +25,7 @@ public class HammerDownCombatant : CustomRole, ICustomRole
     public override RoleTypeId Role { get; set; } = RoleTypeId.NtfSpecialist;
 
     public override int MaxHealth { get; set; } = 100;
+    public RoleTypeId RoleToBe { get; set; } = RoleTypeId.NtfSpecialist;
 
     public override string Name { get; set; } = "Nu-7 Hammer Down Combatant";
 
@@ -92,4 +93,5 @@ public class HammerDownCombatant : CustomRole, ICustomRole
         player.HumeShield = 0f;
         player.DisableAllEffects();
     }
+
 }

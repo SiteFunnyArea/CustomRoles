@@ -8,28 +8,24 @@ using Exiled.CustomRoles.API.Features;
 using MEC;
 
 [CustomAbility]
-public class HealingMist : ActiveAbility
+public class HealingMist : PassiveAbility
 {
     private readonly List<CoroutineHandle> coroutines = new ();
 
     public override string Name { get; set; } = "Healing Mist";
 
     public override string Description { get; set; } =
-        "Activates a short-term spray of chemicals which will heal and protect allies for a short duration.";
+        "Activates a short-term spray of chemicals which will heal and protect allies.";
 
-    public override float Duration { get; set; } = 15f;
-
-    public override float Cooldown { get; set; } = 180f;
+    public float Seconds { get; set; } = 10;
 
     [Description("The amount healed every second the ability is active.")]
     public float HealAmount { get; set; } = 6;
 
-    [Description("The amount of AHP given when the ability ends.")]
-    public ushort ProtectionAmount { get; set; } = 45;
-
-    protected override void AbilityUsed(Player player)
+    protected override void AbilityAdded(Player player)
     {
         ActivateMist(player);
+        base.AbilityAdded(player);
     }
 
     protected override void UnsubscribeEvents()
@@ -50,18 +46,21 @@ public class HealingMist : ActiveAbility
 
     private IEnumerator<float> DoMist(Player activator, Player player)
     {
-        for (int i = 0; i < Duration; i++)
+        for (;;)
         {
             if (player.Health + HealAmount >= player.MaxHealth ||
-                (player.Position - activator.Position).sqrMagnitude > 144f)
+                (player.Position - activator.Position).sqrMagnitude > 144f || !Check(activator))
                 continue;
 
             player.Health += HealAmount;
 
-            yield return Timing.WaitForSeconds(0.75f);
-        }
+            yield return Timing.WaitForSeconds(Seconds);
 
-        if ((activator.Position - player.Position).sqrMagnitude < 144f)
-            player.ArtificialHealth += ProtectionAmount;
+            if (!Check(activator))
+            {
+                foreach (CoroutineHandle handle in coroutines)
+                    Timing.KillCoroutines(handle);
+            }
+        }
     }
 }

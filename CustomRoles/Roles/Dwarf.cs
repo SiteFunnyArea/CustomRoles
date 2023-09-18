@@ -17,7 +17,7 @@ using UnityEngine;
 public class Dwarf : CustomRole, ICustomRole
 {
     public int Chance { get; set; } = 100;
-
+    public RoleTypeId RoleToBe { get; set; } = RoleTypeId.None;
     public StartTeam StartTeam { get; set; } = StartTeam.ClassD;
 
     public override uint Id { get; set; } = 5;

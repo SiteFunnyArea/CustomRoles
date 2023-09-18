@@ -16,6 +16,8 @@ using Player = Exiled.Events.Handlers.Player;
 [CustomRole(RoleTypeId.Scp0492)]
 public class MedicZombie : CustomRole, ICustomRole
 {
+    public RoleTypeId RoleToBe { get; set; } = RoleTypeId.Scp0492;
+
     public int Chance { get; set; } = 0;
 
     public StartTeam StartTeam { get; set; } = StartTeam.Scp | StartTeam.Revived;

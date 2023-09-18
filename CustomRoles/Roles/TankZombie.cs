@@ -25,6 +25,7 @@ public class TankZombie : CustomRole, ICustomRole
     public override RoleTypeId Role { get; set; } = RoleTypeId.Scp0492;
 
     public override int MaxHealth { get; set; } = 1100;
+    public RoleTypeId RoleToBe { get; set; } = RoleTypeId.Scp0492;
 
     public override string Name { get; set; } = "Juggernaut Zombie";
 

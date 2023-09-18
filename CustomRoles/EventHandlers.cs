@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using CustomRoles.API;
 
 using Exiled.API.Enums;
+using Exiled.API.Extensions;
 using Exiled.API.Features;
 using Exiled.API.Features.Items;
 using Exiled.CustomRoles.API;
@@ -86,8 +87,7 @@ public class EventHandlers
         dClassRoles.Dispose();
         scpRoles.Dispose();
     }
-
-    public void OnRespawningTeam(RespawningTeamEventArgs ev)
+        public void OnRespawningTeam(RespawningTeamEventArgs ev)
     {
         if (ev.Players.Count == 0)
         {
@@ -111,14 +111,16 @@ public class EventHandlers
                     roles = pluginRole.GetEnumerator();
                 break;
         }
-
         foreach (Player player in ev.Players)
         {
             CustomRole? role = Methods.GetCustomRole(ref roles);
             uint? limit = (uint)(role?.SpawnProperties.Limit - 1);
-            if (role?.TrackedPlayers.Count <= limit)
-                role?.AddRole(player);
             
+            if (role?.TrackedPlayers.Count <= limit)
+            {
+                role?.AddRole(player);
+            }
+
         }
 
         roles.Dispose();

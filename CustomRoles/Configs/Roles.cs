@@ -84,4 +84,16 @@ public class Roles
         new Captain(),
     };
 
+    public List<Silencer> Silencers { get; set; } = new()
+    {
+        new Silencer(),
+    };
+    public List<Bulldozer> Bulldozers { get; set; } = new()
+    {
+        new Bulldozer(),
+    };
+    public List<Sniper> Snipers { get; set; } = new()
+    {
+        new Sniper(),
+    };
 }

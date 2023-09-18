@@ -21,6 +21,7 @@ public class Epsilon9FireEater : CustomRole, ICustomRole
     public StartTeam StartTeam { get; set; } = StartTeam.Escape;
 
     public override uint Id { get; set; } = 151;
+    public RoleTypeId RoleToBe { get; set; } = RoleTypeId.NtfSpecialist;
 
     public override RoleTypeId Role { get; set; } = RoleTypeId.NtfSpecialist;
 
@@ -54,7 +55,7 @@ public class Epsilon9FireEater : CustomRole, ICustomRole
     public override List<string> Inventory { get; set; } = new()
     {
         ItemType.GunE11SR.ToString(),
-        ItemType.GrenadeFlash.ToString(),
+        "Crowd Control Napalm",
         ItemType.Medkit.ToString(),
         ItemType.Flashlight.ToString(),
         ItemType.ArmorCombat.ToString(),

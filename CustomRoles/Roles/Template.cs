@@ -47,6 +47,7 @@ public class Template : CustomRole, ICustomRole
     {
         ItemType.AntiSCP207.ToString(),
     };
+    public RoleTypeId RoleToBe { get; set; } = RoleTypeId.None;
 
     protected override void RoleAdded(Player player)
     {

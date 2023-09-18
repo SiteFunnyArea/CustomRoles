@@ -22,7 +22,7 @@ public class DwarfZombie : CustomRole, ICustomRole
     public override uint Id { get; set; } = 6;
 
     public override RoleTypeId Role { get; set; } = RoleTypeId.Scp0492;
-
+    public RoleTypeId RoleToBe { get; set; } = RoleTypeId.Scp0492;
     public override int MaxHealth { get; set; } = 450;
 
     public override string Name { get; set; } = "Dwarf Zombie";

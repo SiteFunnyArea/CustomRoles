@@ -14,25 +14,26 @@ using PlayerRoles;
 
 using Player = Exiled.Events.Handlers.Player;
 
-[CustomRole(RoleTypeId.NtfSpecialist)]
+[CustomRole(RoleTypeId.NtfPrivate)]
 public class Medic : CustomRole, ICustomRole
 {
     public int Chance { get; set; } = 75;
+    public RoleTypeId RoleToBe { get; set; } = RoleTypeId.NtfPrivate;
 
     public StartTeam StartTeam { get; set; } = StartTeam.Escape;
 
     public override uint Id { get; set; } = 7;
 
-    public override RoleTypeId Role { get; set; } = RoleTypeId.NtfSpecialist;
+    public override RoleTypeId Role { get; set; } = RoleTypeId.NtfPrivate;
 
     public override int MaxHealth { get; set; } = 120;
 
-    public override string Name { get; set; } = "Medic";
+    public override string Name { get; set; } = "Nine-Tailed Fox Medic";
 
     public override string Description { get; set; } =
         "A medic, equipped with a Medigun, TranqGun, EMP Grenade, and has the ability to activate a mist of healing chemicals around them, protecting nearby allies.\nYou can use \".special\" to activate a spray of healing mist to heal and fortify nearby allies.\nYou can keybind this ability with \"cmdbind KEY .special\"";
 
-    public override string CustomInfo { get; set; } = "MedicTest";
+    public override string CustomInfo { get; set; } = "Nine-Tailed Fox Medic";
 
     public override List<string> Inventory { get; set; } = new()
     {

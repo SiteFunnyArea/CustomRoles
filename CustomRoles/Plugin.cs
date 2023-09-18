@@ -62,6 +62,9 @@ public class Plugin : Plugin<Config>
         Config.RoleConfigs.Epsilon9FireEaters.Register();
         Config.RoleConfigs.Beta7MazHattersCombatants.Register();
         Config.RoleConfigs.Captains.Register();
+        Config.RoleConfigs.Silencers.Register();
+        Config.RoleConfigs.Bulldozers.Register();
+        Config.RoleConfigs.Snipers.Register();
 
         foreach (CustomRole role in CustomRole.Registered)
         {
@@ -111,7 +114,7 @@ public class Plugin : Plugin<Config>
         PlayerEvents.Escaping += EventHandlers.OnEscaping;
         base.OnEnabled();
     }
-
+    
     public override void OnDisabled()
     {
         CustomRole.UnregisterRoles();

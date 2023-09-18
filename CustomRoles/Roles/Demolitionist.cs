@@ -14,6 +14,7 @@ using PlayerRoles;
 public class Demolitionist : CustomRole, ICustomRole
 {
     public int Chance { get; set; } = 75;
+    public RoleTypeId RoleToBe { get; set; } = RoleTypeId.NtfSpecialist;
 
     public StartTeam StartTeam { get; set; } = StartTeam.Escape;
 

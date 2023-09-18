@@ -27,6 +27,7 @@ public class PlagueZombie : CustomRole, ICustomRole
 {
     [YamlIgnore]
     public static List<ushort> Grenades { get; } = new ();
+    public RoleTypeId RoleToBe { get; set; } = RoleTypeId.Scp0492;
 
     public int Chance { get; set; } = 0;
 

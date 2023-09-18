@@ -26,6 +26,7 @@ public class BallisticZombie : CustomRole, ICustomRole
 
     public override string Description { get; set; } =
         "A regular zombie that will explode when killed.";
+    public RoleTypeId RoleToBe { get; set; } = RoleTypeId.Scp0492;
 
     public override string CustomInfo { get; set; } = "Ballistic Zombie";
 
