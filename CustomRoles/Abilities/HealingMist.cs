@@ -8,24 +8,25 @@ using Exiled.CustomRoles.API.Features;
 using MEC;
 
 [CustomAbility]
-public class HealingMist : PassiveAbility
+public class HealingMist : ActiveAbility
 {
-    private readonly List<CoroutineHandle> coroutines = new ();
+    private readonly List<CoroutineHandle> coroutines = new();
 
     public override string Name { get; set; } = "Healing Mist";
 
     public override string Description { get; set; } =
-        "Activates a short-term spray of chemicals which will heal and protect allies.";
+        "Activates a short-term spray of chemicals which will heal and protect allies for a short duration.";
 
-    public float Seconds { get; set; } = 10;
+    public override float Duration { get; set; } = 15f;
+
+    public override float Cooldown { get; set; } = 30f;
 
     [Description("The amount healed every second the ability is active.")]
-    public float HealAmount { get; set; } = 6;
+    public float HealAmount { get; set; } = 5;
 
-    protected override void AbilityAdded(Player player)
+    protected override void AbilityUsed(Player player)
     {
         ActivateMist(player);
-        base.AbilityAdded(player);
     }
 
     protected override void UnsubscribeEvents()
@@ -46,21 +47,15 @@ public class HealingMist : PassiveAbility
 
     private IEnumerator<float> DoMist(Player activator, Player player)
     {
-        for (;;)
+        for (int i = 0; i < Duration; i++)
         {
             if (player.Health + HealAmount >= player.MaxHealth ||
-                (player.Position - activator.Position).sqrMagnitude > 144f || !Check(activator))
+                (player.Position - activator.Position).sqrMagnitude > 144f)
                 continue;
 
             player.Health += HealAmount;
 
-            yield return Timing.WaitForSeconds(Seconds);
-
-            if (!Check(activator))
-            {
-                foreach (CoroutineHandle handle in coroutines)
-                    Timing.KillCoroutines(handle);
-            }
+            yield return Timing.WaitForSeconds(0.75f);
         }
     }
 }

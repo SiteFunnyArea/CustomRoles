@@ -46,25 +46,6 @@ public class Plugin : Plugin<Config>
         Config.LoadConfigs();
 
         CustomRole.RegisterRoles(false, Config.RoleConfigs);
-        Config.RoleConfigs.Demolitionists.Register();
-        Config.RoleConfigs.Dwarves.Register();
-        Config.RoleConfigs.Medics.Register();
-        Config.RoleConfigs.Phantoms.Register();
-        Config.RoleConfigs.BallisticZombies.Register();
-        Config.RoleConfigs.BerserkZombies.Register();
-        Config.RoleConfigs.ChargerZombies.Register();
-        Config.RoleConfigs.DwarfZombies.Register();
-        Config.RoleConfigs.MedicZombies.Register();
-        Config.RoleConfigs.PdZombies.Register();
-        Config.RoleConfigs.PlagueZombies.Register();
-        Config.RoleConfigs.TankZombies.Register();
-        Config.RoleConfigs.HammerDownCombatants.Register();
-        Config.RoleConfigs.Epsilon9FireEaters.Register();
-        Config.RoleConfigs.Beta7MazHattersCombatants.Register();
-        Config.RoleConfigs.Captains.Register();
-        Config.RoleConfigs.Silencers.Register();
-        Config.RoleConfigs.Bulldozers.Register();
-        Config.RoleConfigs.Snipers.Register();
 
         foreach (CustomRole role in CustomRole.Registered)
         {

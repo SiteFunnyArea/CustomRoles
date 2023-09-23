@@ -77,9 +77,7 @@ public class EventHandlers
                     break;
             }
 
-            uint? limit = (uint)(role?.SpawnProperties.Limit - 1);
-            if (role?.TrackedPlayers.Count <= limit)
-                role?.AddRole(player);
+            AddRole(role, player);
         }
 
         guardRoles.Dispose();
@@ -87,7 +85,8 @@ public class EventHandlers
         dClassRoles.Dispose();
         scpRoles.Dispose();
     }
-        public void OnRespawningTeam(RespawningTeamEventArgs ev)
+
+    public void OnRespawningTeam(RespawningTeamEventArgs ev)
     {
         if (ev.Players.Count == 0)
         {
@@ -105,22 +104,23 @@ public class EventHandlers
             case SpawnableTeamType.ChaosInsurgency:
                 if (plugin.Roles.TryGetValue(StartTeam.Chaos, out List<ICustomRole>? role))
                     roles = role.GetEnumerator();
+                Log.Debug("Team is CI");
                 break;
             case SpawnableTeamType.NineTailedFox:
                 if (plugin.Roles.TryGetValue(StartTeam.Ntf, out List<ICustomRole>? pluginRole))
                     roles = pluginRole.GetEnumerator();
+                Log.Debug("Team is NTF");
                 break;
         }
+
         foreach (Player player in ev.Players)
         {
-            CustomRole? role = Methods.GetCustomRole(ref roles);
-            uint? limit = (uint)(role?.SpawnProperties.Limit - 1);
-            
-            if (role?.TrackedPlayers.Count <= limit)
-            {
-                role?.AddRole(player);
-            }
+            if (API.API.ExemptPlayers.TryGetValue(player, out ExemptionType type) && type.HasFlag(ExemptionType.Respawn))
+                continue;
 
+            CustomRole? role = Methods.GetCustomRole(ref roles);
+
+            AddRole(role, player, true);
         }
 
         roles.Dispose();
@@ -143,10 +143,9 @@ public class EventHandlers
             CustomRole? role = Methods.GetCustomRole(ref roles, false, true);
 
             Log.Debug($"Got custom role {role?.Name}");
-            uint? limit = (uint)(role?.SpawnProperties.Limit - 1);
-            if (role?.TrackedPlayers.Count <= limit)
-              role?.AddRole(ev.Target);
-           
+            if (ev.Target.GetCustomRoles().Count == 0)
+                AddRole(role, ev.Target);
+
 
             roles.Dispose();
         }
@@ -159,12 +158,12 @@ public class EventHandlers
         {
             Log.Debug($"{nameof(OnEscaping)}: List count {plugin.Roles[StartTeam.Escape].Count}");
             List<ICustomRole>.Enumerator roles = plugin.Roles[StartTeam.Escape].GetEnumerator();
-            CustomRole? role = Methods.GetCustomRole(ref roles, true, false);
+            CustomRole? role = Methods.GetCustomRole(ref roles, ev.NewRole.GetRoleBase().RoleTypeId, true, false);
 
             Log.Debug($"Got custom role {role?.Name}");
-            uint? limit = (uint)(role?.SpawnProperties.Limit - 1);
-            if (role?.TrackedPlayers.Count <= limit)
-                role?.AddRole(ev.Player);
+
+            if (ev.Player.GetCustomRoles().Count == 0)
+                AddRole(role, ev.Player);
 
 
             roles.Dispose();
@@ -179,5 +178,27 @@ public class EventHandlers
         Log.Warn($"Stopped doll for {ev.Player.Nickname}");
         ev.IsAllowed = false;
         plugin.StopRagdollList.Remove(ev.Player);
+    }
+    public void AddRole(CustomRole? role, Player player, bool setRoleAfter = false)
+    {
+
+        uint? limit = (uint)(role?.SpawnProperties.Limit - 1);
+        if (role?.TrackedPlayers.Count <= limit)
+        {
+            role?.AddRole(player);
+            if (setRoleAfter == true)
+            {
+                player.Role.Set(role.Role, RoleSpawnFlags.None);
+                player.RoleManager.ServerSetRole(role.Role, RoleChangeReason.Respawn);
+            }
+            else
+            {
+            }
+
+        }
+        else
+        {
+            return;
+        }
     }
 }

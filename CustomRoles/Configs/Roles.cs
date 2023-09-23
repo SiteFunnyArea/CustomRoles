@@ -2,6 +2,8 @@ namespace CustomRoles.Configs;
 
 using System.Collections.Generic;
 using CustomRoles.Roles;
+using Exiled.CustomRoles.API.Features;
+using YamlDotNet.Serialization;
 
 public class Roles
 {
@@ -95,5 +97,50 @@ public class Roles
     public List<Sniper> Snipers { get; set; } = new()
     {
         new Sniper(),
+    };
+
+    public List<Brute> Brutes { get; set; } = new()
+    {
+        new Brute(),
+    };
+
+    public List<ClassD9341> ClassD9341s { get; set; } = new()
+    {
+        new ClassD9341(),
+    };
+
+    public List<FlashlightMan> FlashlightMans { get; set; } = new()
+    {
+        new FlashlightMan(),
+    };
+
+    public List<FacilityGuardGunslinger> FacilityGuardGunslingers { get; set; } = new()
+    {
+        new FacilityGuardGunslinger(),
+    };
+
+    public List<FacilityGuardMedic> FacilityGuardMedics { get; set; } = new()
+    {
+        new FacilityGuardMedic(),
+    };
+
+    public List<FacilityGuardSupervisor> FacilityGuardSupervisors { get; set; } = new()
+    {
+        new FacilityGuardSupervisor(),
+    };
+
+    public List<FacilityGuardZM> FacilityGuardZMs { get; set; } = new()
+    {
+        new FacilityGuardZM(),
+    };
+
+    public List<ContainmentEngineer> ContainmentEngineers { get; set; } = new()
+    {
+        new ContainmentEngineer(),
+    };
+
+    public List<Major> Majors { get; set; } = new()
+    {
+        new Major(),
     };
 }

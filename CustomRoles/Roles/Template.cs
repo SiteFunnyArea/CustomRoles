@@ -34,7 +34,7 @@ public class Template : CustomRole, ICustomRole
 
     public override bool KeepInventoryOnSpawn { get; set; } = false;
 
-    public override bool KeepRoleOnDeath { get; set; } = true;
+    public override bool KeepRoleOnDeath { get; set; } = false;
 
     public override bool RemovalKillsPlayer { get; set; } = false;
 
