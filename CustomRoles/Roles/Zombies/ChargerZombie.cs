@@ -18,7 +18,7 @@ public class ChargerZombie : CustomRole, ICustomRole
     public StartTeam StartTeam { get; set; } = StartTeam.Scp | StartTeam.Revived; 
     public RoleTypeId RoleToBe { get; set; } = RoleTypeId.Scp0492;
 
-    public override uint Id { get; set; } = 3;
+    public override uint Id { get; set; } = 32;
 
     public override RoleTypeId Role { get; set; } = RoleTypeId.Scp0492;
 

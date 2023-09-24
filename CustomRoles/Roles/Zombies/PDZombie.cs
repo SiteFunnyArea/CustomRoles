@@ -26,7 +26,7 @@ public class PDZombie : CustomRole, ICustomRole
     public StartTeam StartTeam { get; set; } = StartTeam.Scp | StartTeam.Revived;
     public RoleTypeId RoleToBe { get; set; } = RoleTypeId.Scp0492;
 
-    public override uint Id { get; set; } = 9;
+    public override uint Id { get; set; } = 35;
 
     public override RoleTypeId Role { get; set; } = RoleTypeId.Scp0492;
 

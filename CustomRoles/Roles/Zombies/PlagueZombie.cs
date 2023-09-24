@@ -33,7 +33,7 @@ public class PlagueZombie : CustomRole, ICustomRole
 
     public StartTeam StartTeam { get; set; } = StartTeam.Scp | StartTeam.Revived;
 
-    public override uint Id { get; set; } = 11;
+    public override uint Id { get; set; } = 36;
 
     public override RoleTypeId Role { get; set; } = RoleTypeId.Scp0492;
 

@@ -18,7 +18,7 @@ public class BerserkZombie : CustomRole, ICustomRole
     public StartTeam StartTeam { get; set; } = StartTeam.Scp | StartTeam.Revived;
     public RoleTypeId RoleToBe { get; set; } = RoleTypeId.Scp0492;
 
-    public override uint Id { get; set; } = 2;
+    public override uint Id { get; set; } = 31;
 
     public override RoleTypeId Role { get; set; } = RoleTypeId.Scp0492;
 

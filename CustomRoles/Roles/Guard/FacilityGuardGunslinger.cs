@@ -17,12 +17,12 @@ using Player = Exiled.Events.Handlers.Player;
 [CustomRole(RoleTypeId.FacilityGuard)]
 public class FacilityGuardGunslinger : CustomRole, ICustomRole
 {
-    public int Chance { get; set; } = 60;
+    public int Chance { get; set; } = 40;
     public RoleTypeId RoleToBe { get; set; } = RoleTypeId.FacilityGuard;
 
     public StartTeam StartTeam { get; set; } = StartTeam.Guard;
 
-    public override uint Id { get; set; } = 450;
+    public override uint Id { get; set; } = 17;
 
     public override RoleTypeId Role { get; set; } = RoleTypeId.FacilityGuard;
 
@@ -32,6 +32,7 @@ public class FacilityGuardGunslinger : CustomRole, ICustomRole
 
     public override string Description { get; set; } =
         "<color=#2bad33><b>Gunslinger</b></color>";
+    public override bool KeepInventoryOnSpawn { get; set; } = false;
 
     public override string CustomInfo { get; set; } = "Facility Guard Gunslinger";
     public override Broadcast Broadcast { get; set; } = new Broadcast()

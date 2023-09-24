@@ -17,7 +17,7 @@ public class BallisticZombie : CustomRole, ICustomRole
 
     public StartTeam StartTeam { get; set; } = StartTeam.Scp | StartTeam.Revived;
 
-    public override uint Id { get; set; } = 1;
+    public override uint Id { get; set; } = 30;
     public override RoleTypeId Role { get; set; } = RoleTypeId.Scp0492;
 
     public override int MaxHealth { get; set; } = 500;

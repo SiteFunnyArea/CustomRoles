@@ -13,16 +13,16 @@ using PlayerRoles;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CustomRole(RoleTypeId.None)]
+[CustomRole(RoleTypeId.Scientist)]
 public class Major : CustomRole, ICustomRole
 {
     public int Chance { get; set; } = 100;
-    public RoleTypeId RoleToBe { get; set; } = RoleTypeId.None;
+    public RoleTypeId RoleToBe { get; set; } = RoleTypeId.Scientist;
     public StartTeam StartTeam { get; set; } = StartTeam.Scientist;
 
-    public override uint Id { get; set; } = 472;
+    public override uint Id { get; set; } = 29;
 
-    public override RoleTypeId Role { get; set; } = RoleTypeId.None;
+    public override RoleTypeId Role { get; set; } = RoleTypeId.Scientist;
 
     public override int MaxHealth { get; set; } = 120;
 
@@ -39,7 +39,7 @@ public class Major : CustomRole, ICustomRole
     
     public override string CustomInfo { get; set; } = "Major";
 
-    public override bool KeepInventoryOnSpawn { get; set; } = true;
+    public override bool KeepInventoryOnSpawn { get; set; } = false;
 
     public override bool KeepRoleOnDeath { get; set; } = true;
 

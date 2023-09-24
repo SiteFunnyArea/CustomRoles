@@ -18,9 +18,10 @@ public class Demolitionist : CustomRole, ICustomRole
 
     public StartTeam StartTeam { get; set; } = StartTeam.Ntf;
 
-    public override uint Id { get; set; } = 4;
+    public override uint Id { get; set; } = 24;
 
     public override RoleTypeId Role { get; set; } = RoleTypeId.NtfPrivate;
+    public override bool KeepInventoryOnSpawn { get; set; } = false;
 
     public override int MaxHealth { get; set; } = 120;
 

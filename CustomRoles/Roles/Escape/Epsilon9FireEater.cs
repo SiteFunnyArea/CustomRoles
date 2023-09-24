@@ -18,9 +18,9 @@ public class Epsilon9FireEater : CustomRole, ICustomRole
 {
     public int Chance { get; set; } = 75;
 
-    public StartTeam StartTeam { get; set; } = StartTeam.Ntf;
+    public StartTeam StartTeam { get; set; } = StartTeam.Escape;
 
-    public override uint Id { get; set; } = 151;
+    public override uint Id { get; set; } = 15;
     public RoleTypeId RoleToBe { get; set; } = RoleTypeId.NtfSpecialist;
 
     public override RoleTypeId Role { get; set; } = RoleTypeId.NtfSpecialist;

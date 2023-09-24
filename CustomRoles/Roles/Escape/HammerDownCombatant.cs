@@ -20,7 +20,7 @@ public class HammerDownCombatant : CustomRole, ICustomRole
 
     public StartTeam StartTeam { get; set; } = StartTeam.Escape;
 
-    public override uint Id { get; set; } = 150;
+    public override uint Id { get; set; } = 16;
 
     public override RoleTypeId Role { get; set; } = RoleTypeId.NtfSpecialist;
 

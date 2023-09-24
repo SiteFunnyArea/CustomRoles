@@ -22,7 +22,8 @@ public class Medic : CustomRole, ICustomRole
 
     public StartTeam StartTeam { get; set; } = StartTeam.Ntf;
 
-    public override uint Id { get; set; } = 7;
+    public override uint Id { get; set; } = 25;
+    public override bool KeepInventoryOnSpawn { get; set; } = false;
 
     public override RoleTypeId Role { get; set; } = RoleTypeId.NtfPrivate;
 

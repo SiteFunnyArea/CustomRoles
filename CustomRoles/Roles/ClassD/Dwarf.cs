@@ -13,16 +13,16 @@ using PlayerRoles;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CustomRole(RoleTypeId.None)]
+[CustomRole(RoleTypeId.ClassD)]
 public class Dwarf : CustomRole, ICustomRole
 {
     public int Chance { get; set; } = 40;
-    public RoleTypeId RoleToBe { get; set; } = RoleTypeId.None;
+    public RoleTypeId RoleToBe { get; set; } = RoleTypeId.ClassD;
     public StartTeam StartTeam { get; set; } = StartTeam.ClassD;
 
-    public override uint Id { get; set; } = 5;
+    public override uint Id { get; set; } = 12;
 
-    public override RoleTypeId Role { get; set; } = RoleTypeId.None;
+    public override RoleTypeId Role { get; set; } = RoleTypeId.ClassD;
 
     public override int MaxHealth { get; set; } = 80;
 

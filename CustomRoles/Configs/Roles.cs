@@ -114,6 +114,13 @@ public class Roles
         new FlashlightMan(),
     };
 
+
+
+    public List<FacilityGuardSupervisor> FacilityGuardSupervisors { get; set; } = new()
+    {
+        new FacilityGuardSupervisor(),
+    };
+
     public List<FacilityGuardGunslinger> FacilityGuardGunslingers { get; set; } = new()
     {
         new FacilityGuardGunslinger(),
@@ -122,11 +129,6 @@ public class Roles
     public List<FacilityGuardMedic> FacilityGuardMedics { get; set; } = new()
     {
         new FacilityGuardMedic(),
-    };
-
-    public List<FacilityGuardSupervisor> FacilityGuardSupervisors { get; set; } = new()
-    {
-        new FacilityGuardSupervisor(),
     };
 
     public List<FacilityGuardZM> FacilityGuardZMs { get; set; } = new()

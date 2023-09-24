@@ -13,16 +13,16 @@ using PlayerRoles;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CustomRole(RoleTypeId.None)]
+[CustomRole(RoleTypeId.ClassD)]
 public class Brute : CustomRole, ICustomRole
 {
     public int Chance { get; set; } = 60;
-    public RoleTypeId RoleToBe { get; set; } = RoleTypeId.None;
+    public RoleTypeId RoleToBe { get; set; } = RoleTypeId.ClassD;
     public StartTeam StartTeam { get; set; } = StartTeam.ClassD;
 
-    public override uint Id { get; set; } = 645;
+    public override uint Id { get; set; } = 10;
 
-    public override RoleTypeId Role { get; set; } = RoleTypeId.None;
+    public override RoleTypeId Role { get; set; } = RoleTypeId.ClassD;
 
     public override int MaxHealth { get; set; } = 120;
 
@@ -39,7 +39,7 @@ public class Brute : CustomRole, ICustomRole
 
     public override string CustomInfo { get; set; } = "Brute";
 
-    public override bool KeepInventoryOnSpawn { get; set; } = true;
+    public override bool KeepInventoryOnSpawn { get; set; } = false;
 
     public override bool KeepRoleOnDeath { get; set; } = true;
 

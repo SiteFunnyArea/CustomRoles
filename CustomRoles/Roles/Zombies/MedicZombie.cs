@@ -22,7 +22,7 @@ public class MedicZombie : CustomRole, ICustomRole
 
     public StartTeam StartTeam { get; set; } = StartTeam.Scp | StartTeam.Revived;
 
-    public override uint Id { get; set; } = 8;
+    public override uint Id { get; set; } = 34;
 
     public override RoleTypeId Role { get; set; } = RoleTypeId.Scp0492;
 

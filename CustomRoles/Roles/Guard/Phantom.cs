@@ -20,7 +20,7 @@ public class Phantom : CustomRole, ICustomRole
 
     public StartTeam StartTeam { get; set; } = StartTeam.Guard;
 
-    public override uint Id { get; set; } = 10;
+    public override uint Id { get; set; } = 21;
 
     public override RoleTypeId Role { get; set; } = RoleTypeId.ChaosConscript;
 
@@ -103,4 +103,6 @@ public class Phantom : CustomRole, ICustomRole
         if (Check(ev.Player) && ev.Item.Type == ItemType.SCP268)
             ev.IsAllowed = false;
     }
+    public override bool KeepInventoryOnSpawn { get; set; } = false;
+
 }

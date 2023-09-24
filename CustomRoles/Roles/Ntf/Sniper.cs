@@ -18,8 +18,9 @@ public class Sniper : CustomRole, ICustomRole
     public int Chance { get; set; } = 0;
 
     public StartTeam StartTeam { get; set; } = StartTeam.Ntf;
+    public override bool KeepInventoryOnSpawn { get; set; } = false;
 
-    public override uint Id { get; set; } = 159;
+    public override uint Id { get; set; } = 27;
     public RoleTypeId RoleToBe { get; set; } = RoleTypeId.NtfPrivate;
 
     public override RoleTypeId Role { get; set; } = RoleTypeId.NtfPrivate;
@@ -37,8 +38,6 @@ public class Sniper : CustomRole, ICustomRole
     public override string Description { get; set; } =
         "You have spawned as a custom class.<br><color=#71afff><b>Nine-Tailed Fox Sniper</b></color>\r\n";
     public override string CustomInfo { get; set; } = "Nine-Tailed Fox Sniper";
-
-    public override bool KeepInventoryOnSpawn { get; set; } = false;
 
     public override bool KeepRoleOnDeath { get; set; } = false;
 

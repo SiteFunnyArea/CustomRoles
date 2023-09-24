@@ -19,7 +19,7 @@ public class Bulldozer : CustomRole, ICustomRole
 
     public StartTeam StartTeam { get; set; } = StartTeam.Ntf;
 
-    public override uint Id { get; set; } = 158;
+    public override uint Id { get; set; } = 22;
     public RoleTypeId RoleToBe { get; set; } = RoleTypeId.NtfPrivate;
 
     public override RoleTypeId Role { get; set; } = RoleTypeId.NtfPrivate;

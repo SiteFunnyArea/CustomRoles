@@ -19,7 +19,7 @@ public class Silencer : CustomRole, ICustomRole
 
     public StartTeam StartTeam { get; set; } = StartTeam.Ntf;
 
-    public override uint Id { get; set; } = 157;
+    public override uint Id { get; set; } = 26;
 
     public override RoleTypeId Role { get; set; } = RoleTypeId.NtfPrivate;
 

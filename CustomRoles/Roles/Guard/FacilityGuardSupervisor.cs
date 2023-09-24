@@ -21,8 +21,9 @@ public class FacilityGuardSupervisor : CustomRole, ICustomRole
     public RoleTypeId RoleToBe { get; set; } = RoleTypeId.FacilityGuard;
 
     public StartTeam StartTeam { get; set; } = StartTeam.Guard;
+    public override bool KeepInventoryOnSpawn { get; set; } = false;
 
-    public override uint Id { get; set; } = 452;
+    public override uint Id { get; set; } = 19;
 
     public override RoleTypeId Role { get; set; } = RoleTypeId.FacilityGuard;
 

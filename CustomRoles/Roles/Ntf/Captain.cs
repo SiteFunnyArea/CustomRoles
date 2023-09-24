@@ -19,7 +19,7 @@ public class Captain : CustomRole, ICustomRole
 
     public StartTeam StartTeam { get; set; } = StartTeam.Ntf;
 
-    public override uint Id { get; set; } = 156;
+    public override uint Id { get; set; } = 23;
     public RoleTypeId RoleToBe { get; set; } = RoleTypeId.NtfCaptain;
 
     public override RoleTypeId Role { get; set; } = RoleTypeId.NtfCaptain;

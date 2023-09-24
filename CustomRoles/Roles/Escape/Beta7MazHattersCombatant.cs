@@ -19,7 +19,7 @@ public class Beta7MazHattersCombatant : CustomRole, ICustomRole
     public int Chance { get; set; } = 75;
 
     public StartTeam StartTeam { get; set; } = StartTeam.Escape;
-    public override uint Id { get; set; } = 152;
+    public override uint Id { get; set; } = 14;
 
     public override RoleTypeId Role { get; set; } = RoleTypeId.NtfSpecialist;
 
