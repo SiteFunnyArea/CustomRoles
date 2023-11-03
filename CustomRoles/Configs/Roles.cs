@@ -130,19 +130,28 @@ public class Roles
     {
         new FacilityGuardMedic(),
     };
-
-    public List<FacilityGuardZM> FacilityGuardZMs { get; set; } = new()
-    {
-        new FacilityGuardZM(),
-    };
-
     public List<ContainmentEngineer> ContainmentEngineers { get; set; } = new()
     {
         new ContainmentEngineer(),
     };
 
-    public List<Major> Majors { get; set; } = new()
+    public List<Labrat> Labrats { get; set; } = new()
     {
-        new Major(),
+        new Labrat(),
+    };
+
+    public List<Janitor> Janitors { get; set; } = new()
+    {
+        new Janitor(),
+    };
+
+    public List<Sprinter> Sprinters { get; set; } = new()
+    {
+        new Sprinter(),
+    };
+
+    public List<Spy> Spys { get; set; } = new()
+    {
+        new Spy(),
     };
 }

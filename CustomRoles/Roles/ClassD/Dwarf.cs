@@ -16,26 +16,27 @@ using UnityEngine;
 [CustomRole(RoleTypeId.ClassD)]
 public class Dwarf : CustomRole, ICustomRole
 {
-    public int Chance { get; set; } = 40;
+    public int Chance { get; set; } = 90;
     public RoleTypeId RoleToBe { get; set; } = RoleTypeId.ClassD;
     public StartTeam StartTeam { get; set; } = StartTeam.ClassD;
 
-    public override uint Id { get; set; } = 12;
+    public override uint Id { get; set; } = 10;
 
     public override RoleTypeId Role { get; set; } = RoleTypeId.ClassD;
 
     public override int MaxHealth { get; set; } = 80;
 
-    public override string Name { get; set; } = "Dwarf";
+    public override string Name { get; set; } = "<color=#f8b200><b>D-0343 Dwarf</b></color>";
 
     public override string Description { get; set; } =
-        "A normal player who has unlimited stamina, and is slightly smaller than normal.";
+        "The Class D that is the youngest of em all. You are smaller and not as strong as the others, though you can take extra candy from <color=#FFEA00>SCP 330</color>, and have <color=#FFEA00>Infinite Sprint</color>!";
 
-    public override string CustomInfo { get; set; } = "Dwarf";
+    public override string CustomInfo { get; set; } = "Dwarf D-0343";
+    public override bool DisplayCustomItemMessages { get; set; } = false;
 
-    public override bool KeepInventoryOnSpawn { get; set; } = true;
+    public override bool KeepInventoryOnSpawn { get; set; } = false;
 
-    public override bool KeepRoleOnDeath { get; set; } = true;
+    public override bool KeepRoleOnDeath { get; set; } = false;
 
     public override bool RemovalKillsPlayer { get; set; } = false;
 
@@ -45,16 +46,7 @@ public class Dwarf : CustomRole, ICustomRole
     };
 
     public override List<CustomAbility>? CustomAbilities { get; set; } = new() {};
-    protected override void SubscribeEvents()
-    {
-        Exiled.Events.Handlers.Scp330.InteractingScp330 += OnCandyAdded;
-        base.SubscribeEvents();
-    }
-    protected override void UnsubscribeEvents()
-    {
-        Exiled.Events.Handlers.Scp330.InteractingScp330 -= OnCandyAdded;
-        base.SubscribeEvents();
-    }
+
     protected override void RoleAdded(Player player)
     {
         Timing.CallDelayed(2.5f, () => player.Scale = new Vector3(0.75f, 0.75f, 0.75f));
@@ -66,13 +58,17 @@ public class Dwarf : CustomRole, ICustomRole
         player.IsUsingStamina = true;
         player.Scale = Vector3.one;
     }
-    public override Broadcast Broadcast { get; set; } = new Broadcast()
+
+    protected override void SubscribeEvents()
     {
-        Content = "You have been spawned in as <color=#EE7600><b>Class D Personnel:</b></color> <color=#2bad33><b>Dwarf</b></color><br><i>There has been a containment breach at the site.</i><br><i>You can get extra candy at the candy bowl. :p</i>\r\n",
-        Duration = 10,
-        Show = true,
-        Type = global::Broadcast.BroadcastFlags.Normal,
-    };
+        Exiled.Events.Handlers.Scp330.InteractingScp330 += OnCandyAdded;
+        base.SubscribeEvents();
+    }
+    protected override void UnsubscribeEvents()
+    {
+        Exiled.Events.Handlers.Scp330.InteractingScp330 -= OnCandyAdded;
+        base.SubscribeEvents();
+    }
     public void OnCandyAdded(InteractingScp330EventArgs ev)
     {
         if (Check(ev.Player))

@@ -8,6 +8,7 @@ using Exiled.API.Enums;
 using Exiled.API.Extensions;
 using Exiled.API.Features;
 using Exiled.API.Features.Items;
+using Exiled.API.Features.Roles;
 using Exiled.CustomRoles.API;
 using Exiled.CustomRoles.API.Features;
 using Exiled.Events.EventArgs.Player;
@@ -76,14 +77,110 @@ public class EventHandlers
                     role = Methods.GetCustomRole(ref scpRoles);
                     break;
             }
+            if (role?.TrackedPlayers.Count != role?.SpawnProperties.Limit)
+            {
+                role?.AddRole(player);
 
-            AddRole(role, player);
+            }
+
         }
 
         guardRoles.Dispose();
         scientistRoles.Dispose();
         dClassRoles.Dispose();
         scpRoles.Dispose();
+    }
+
+    public void Spawned(SpawnedEventArgs ev)
+    {
+        List<ICustomRole>.Enumerator PrivateRoles = new();
+        List<ICustomRole>.Enumerator SergeantRoles = new();
+        List<ICustomRole>.Enumerator SpecialistRoles = new();
+        List<ICustomRole>.Enumerator CaptainRoles = new();
+        List<ICustomRole>.Enumerator ConscriptRoles = new();
+        List<ICustomRole>.Enumerator MarauderRoles = new();
+        List<ICustomRole>.Enumerator RepressorRoles = new();
+        List<ICustomRole>.Enumerator RiflemanRoles = new();
+
+        foreach (KeyValuePair<StartTeam, List<ICustomRole>> kvp in plugin.Roles)
+        {
+            Log.Debug($"Setting enumerator for {kvp.Key} - {kvp.Value.Count}");
+            switch (kvp.Key)
+            {
+                case StartTeam.Private:
+                    PrivateRoles = kvp.Value.GetEnumerator();
+                    break;
+                case StartTeam.Sergeant:
+                    SergeantRoles = kvp.Value.GetEnumerator();
+                    break;
+                case StartTeam.Specialist:
+                    SpecialistRoles = kvp.Value.GetEnumerator();
+                    break;
+                case StartTeam.Captain:
+                    CaptainRoles = kvp.Value.GetEnumerator();
+                    break;
+                case StartTeam.Conscript:
+                    ConscriptRoles = kvp.Value.GetEnumerator();
+                    break;
+                case StartTeam.Marauder:
+                    MarauderRoles = kvp.Value.GetEnumerator();
+                    break;
+                case StartTeam.Repressor:
+                    RepressorRoles = kvp.Value.GetEnumerator();
+                    break;
+                case StartTeam.Rifleman:
+                    RiflemanRoles = kvp.Value.GetEnumerator();
+                    break;
+            }
+        }
+        if (API.API.ExemptPlayers.TryGetValue(ev.Player, out ExemptionType type) && type.HasFlag(ExemptionType.Respawn))
+            return;
+
+        Log.Debug($"Trying to give {ev.Player.Nickname} a role | {ev.Player.Role.Type}");
+        CustomRole? role = null;
+
+        switch (ev.Player.Role.Type)
+        {
+            case RoleTypeId.NtfPrivate:
+                role = Methods.GetCustomRole(ref PrivateRoles);
+                break;
+            case RoleTypeId.NtfSergeant:
+                role = Methods.GetCustomRole(ref SergeantRoles);
+                break;
+            case RoleTypeId.NtfSpecialist:
+                role = Methods.GetCustomRole(ref SpecialistRoles);
+                break;
+            case RoleTypeId.NtfCaptain:
+                role = Methods.GetCustomRole(ref CaptainRoles);
+                break;
+            case RoleTypeId.ChaosConscript:
+                role = Methods.GetCustomRole(ref ConscriptRoles);
+                break;
+            case RoleTypeId.ChaosRepressor:
+                role = Methods.GetCustomRole(ref RepressorRoles);
+                break;
+            case RoleTypeId.ChaosRifleman:
+                role = Methods.GetCustomRole(ref RiflemanRoles);
+                break;
+            case RoleTypeId.ChaosMarauder:
+                role = Methods.GetCustomRole(ref MarauderRoles);
+                break;
+        }
+        if (role?.TrackedPlayers.Count != role?.SpawnProperties.Limit)
+        {
+            role?.AddRole(ev.Player);
+
+        }
+
+        PrivateRoles.Dispose();
+        SergeantRoles.Dispose();
+        SpecialistRoles.Dispose();
+        CaptainRoles.Dispose();
+        ConscriptRoles.Dispose();
+        MarauderRoles.Dispose();
+        RepressorRoles.Dispose();
+        RiflemanRoles.Dispose();
+
     }
 
     public void OnRespawningTeam(RespawningTeamEventArgs ev)
@@ -120,7 +217,11 @@ public class EventHandlers
 
             CustomRole? role = Methods.GetCustomRole(ref roles);
 
-            AddRole(role, player, true);
+            if (role?.TrackedPlayers.Count != role?.SpawnProperties.Limit)
+            {
+                role?.AddRole(player);
+
+            }
         }
 
         roles.Dispose();
@@ -144,8 +245,14 @@ public class EventHandlers
 
             Log.Debug($"Got custom role {role?.Name}");
             if (ev.Target.GetCustomRoles().Count == 0)
-                AddRole(role, ev.Target);
+            {
+                if (role?.TrackedPlayers.Count != role?.SpawnProperties.Limit)
+                {
+                    role?.AddRole(ev.Target);
 
+                }
+
+            }
 
             roles.Dispose();
         }
@@ -163,8 +270,14 @@ public class EventHandlers
             Log.Debug($"Got custom role {role?.Name}");
 
             if (ev.Player.GetCustomRoles().Count == 0)
-                AddRole(role, ev.Player);
+            {
+                if (role?.TrackedPlayers.Count != role?.SpawnProperties.Limit)
+                {
+                    role?.AddRole(ev.Player);
 
+                }
+
+            }
 
             roles.Dispose();
         }
@@ -179,26 +292,6 @@ public class EventHandlers
         ev.IsAllowed = false;
         plugin.StopRagdollList.Remove(ev.Player);
     }
-    public void AddRole(CustomRole? role, Player player, bool setRoleAfter = false)
-    {
+        
 
-        uint? limit = (uint)(role?.SpawnProperties.Limit - 1);
-        if (role?.TrackedPlayers.Count <= limit)
-        {
-            role?.AddRole(player);
-            if (setRoleAfter == true)
-            {
-                player.Role.Set(role.Role, RoleSpawnFlags.None);
-                player.RoleManager.ServerSetRole(role.Role, RoleChangeReason.Respawn);
-            }
-            else
-            {
-            }
-
-        }
-        else
-        {
-            return;
-        }
     }
-}

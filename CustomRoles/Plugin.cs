@@ -75,6 +75,22 @@ public class Plugin : Plugin<Config>
                     team = StartTeam.Scp;
                 else if (custom.StartTeam.HasFlag(StartTeam.Escape))
                     team = StartTeam.Escape;
+                else if (custom.StartTeam.HasFlag(StartTeam.Private))
+                    team = StartTeam.Private;
+                else if (custom.StartTeam.HasFlag(StartTeam.Sergeant))
+                    team = StartTeam.Sergeant;
+                else if (custom.StartTeam.HasFlag(StartTeam.Specialist))
+                    team = StartTeam.Specialist;
+                else if (custom.StartTeam.HasFlag(StartTeam.Captain))
+                    team = StartTeam.Captain;
+                else if (custom.StartTeam.HasFlag(StartTeam.Conscript))
+                    team = StartTeam.Conscript;
+                else if (custom.StartTeam.HasFlag(StartTeam.Marauder))
+                    team = StartTeam.Marauder;
+                else if (custom.StartTeam.HasFlag(StartTeam.Repressor))
+                    team = StartTeam.Repressor;
+                else if (custom.StartTeam.HasFlag(StartTeam.Rifleman))
+                    team = StartTeam.Rifleman;
                 else
                     team = StartTeam.Other;
 
@@ -92,6 +108,8 @@ public class Plugin : Plugin<Config>
         ServerEvents.ReloadedConfigs += EventHandlers.OnReloadedConfigs;
         Scp049Events.FinishingRecall += EventHandlers.FinishingRecall;
         PlayerEvents.SpawningRagdoll += EventHandlers.OnSpawningRagdoll;
+        PlayerEvents.Spawned += EventHandlers.Spawned;
+
         PlayerEvents.Escaping += EventHandlers.OnEscaping;
         base.OnEnabled();
     }

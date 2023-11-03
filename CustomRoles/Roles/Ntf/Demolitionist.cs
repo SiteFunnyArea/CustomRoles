@@ -3,7 +3,7 @@ namespace CustomRoles.Roles;
 using System.Collections.Generic;
 
 using CustomRoles.API;
-
+using Exiled.API.Features;
 using Exiled.API.Features.Attributes;
 using Exiled.API.Features.Spawn;
 using Exiled.CustomRoles.API.Features;
@@ -13,16 +13,24 @@ using PlayerRoles;
 [CustomRole(RoleTypeId.NtfSpecialist)]
 public class Demolitionist : CustomRole, ICustomRole
 {
-    public int Chance { get; set; } = 0;
-    public RoleTypeId RoleToBe { get; set; } = RoleTypeId.NtfPrivate;
+    public int Chance { get; set; } = 75;
+    public RoleTypeId RoleToBe { get; set; } = RoleTypeId.NtfCaptain;
 
-    public StartTeam StartTeam { get; set; } = StartTeam.Ntf;
+    public StartTeam StartTeam { get; set; } = StartTeam.Captain;
 
     public override uint Id { get; set; } = 24;
 
-    public override RoleTypeId Role { get; set; } = RoleTypeId.NtfPrivate;
+    public override RoleTypeId Role { get; set; } = RoleTypeId.NtfCaptain;
     public override bool KeepInventoryOnSpawn { get; set; } = false;
+    public override void AddRole(Player player)
+    {
+        if (player.Role != Role)
+        {
+            return;
+        }
 
+        base.AddRole(player);
+    }
     public override int MaxHealth { get; set; } = 120;
 
     public override string Name { get; set; } = "Demolitionist";

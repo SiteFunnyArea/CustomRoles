@@ -23,24 +23,19 @@ public class FacilityGuardSupervisor : CustomRole, ICustomRole
     public StartTeam StartTeam { get; set; } = StartTeam.Guard;
     public override bool KeepInventoryOnSpawn { get; set; } = false;
 
-    public override uint Id { get; set; } = 19;
+    public override uint Id { get; set; } = 2513;
 
     public override RoleTypeId Role { get; set; } = RoleTypeId.FacilityGuard;
 
-    public override int MaxHealth { get; set; } = 100;
+    public override int MaxHealth { get; set; } = 120;
 
-    public override string Name { get; set; } = "Facility Guard Supervisor";
+    public override string Name { get; set; } = "<color=#727472><b>Facility Guard Supervisor</b></color>";
 
     public override string Description { get; set; } =
-        "<color=#2bad33><b>Supervisor</b></color>";
-    public override string CustomInfo { get; set; } = "Facility Guard Supervisor";
-    public override Broadcast Broadcast { get; set; } = new Broadcast()
-    {
-        Content = "You have been spawned in as <color=#727472><b>Facility Guard:</b></color> <color=#2bad33><b>Gunslinger</b></color><br><i>There has been a containment breach at the site.</i><br><i>Provide combative support with all your fine weaponry.</i>\r\n[4:27 PM]\r\n",
-        Duration = 10,
-        Show = true,
-        Type = global::Broadcast.BroadcastFlags.Normal,
-    };
+        "You spawn with <color=#FFEA00>extra weapons</color> and <color=#FFEA00>extra HP</color>. Lead your Facility Guard team to victory and wait for <color=#960018>RRT</color> or <color=#005EBC>MTF</color>.";
+    public override string CustomInfo { get; set; } = "Supervisor";
+    public override bool DisplayCustomItemMessages { get; set; } = false;
+
     public override List<string> Inventory { get; set; } = new()
     {
         $"{ItemType.GunE11SR}",

@@ -15,15 +15,14 @@ using UnityEngine;
 [CustomRole(RoleTypeId.NtfPrivate)]
 public class Bulldozer : CustomRole, ICustomRole
 {
-    public int Chance { get; set; } = 0;
+    public int Chance { get; set; } = 100;
 
-    public StartTeam StartTeam { get; set; } = StartTeam.Ntf;
+    public StartTeam StartTeam { get; set; } = StartTeam.Sergeant;
 
     public override uint Id { get; set; } = 22;
-    public RoleTypeId RoleToBe { get; set; } = RoleTypeId.NtfPrivate;
+    public RoleTypeId RoleToBe { get; set; } = RoleTypeId.NtfSergeant;
 
-    public override RoleTypeId Role { get; set; } = RoleTypeId.NtfPrivate;
-
+    public override RoleTypeId Role { get; set; } = RoleTypeId.NtfSergeant;
     public override int MaxHealth { get; set; } = 100;
     public override Broadcast Broadcast { get; set; } = new Broadcast()
     {
@@ -41,7 +40,15 @@ public class Bulldozer : CustomRole, ICustomRole
     public override bool KeepInventoryOnSpawn { get; set; } = false;
 
     public override bool KeepRoleOnDeath { get; set; } = false;
+    public override void AddRole(Player player)
+    {
+        if(player.Role != Role)
+        {
+            return;
+        }
 
+        base.AddRole(player);
+    }
     public override bool RemovalKillsPlayer { get; set; } = false;
 
     public override SpawnProperties SpawnProperties { get; set; } = new()

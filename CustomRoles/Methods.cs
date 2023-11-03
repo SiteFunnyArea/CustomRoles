@@ -48,7 +48,7 @@ public class Methods
             }
 
             Log.Debug("Cannot move next");
-
+            
             return null;
         }
         catch (Exception)

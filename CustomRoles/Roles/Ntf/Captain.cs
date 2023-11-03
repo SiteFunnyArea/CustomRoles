@@ -15,9 +15,9 @@ using UnityEngine;
 [CustomRole(RoleTypeId.NtfCaptain)]
 public class Captain : CustomRole, ICustomRole
 {
-    public int Chance { get; set; } = 0;
+    public int Chance { get; set; } = 50;
 
-    public StartTeam StartTeam { get; set; } = StartTeam.Ntf;
+    public StartTeam StartTeam { get; set; } = StartTeam.Captain;
 
     public override uint Id { get; set; } = 23;
     public RoleTypeId RoleToBe { get; set; } = RoleTypeId.NtfCaptain;
@@ -41,7 +41,15 @@ public class Captain : CustomRole, ICustomRole
     public override bool KeepInventoryOnSpawn { get; set; } = false;
 
     public override bool KeepRoleOnDeath { get; set; } = false;
+        public override void AddRole(Player player)
+    {
+        if(player.Role != Role)
+        {
+            return;
+        }
 
+        base.AddRole(player);
+    }
     public override bool RemovalKillsPlayer { get; set; } = false;
 
     public override SpawnProperties SpawnProperties { get; set; } = new()

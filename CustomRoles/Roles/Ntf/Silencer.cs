@@ -15,13 +15,21 @@ using UnityEngine;
 [CustomRole(RoleTypeId.NtfPrivate)]
 public class Silencer : CustomRole, ICustomRole
 {
-    public int Chance { get; set; } = 0;
+    public int Chance { get; set; } = 100;
 
-    public StartTeam StartTeam { get; set; } = StartTeam.Ntf;
+    public StartTeam StartTeam { get; set; } = StartTeam.Sergeant;
 
     public override uint Id { get; set; } = 26;
+    public override void AddRole(Player player)
+    {
+        if (player.Role != Role)
+        {
+            return;
+        }
 
-    public override RoleTypeId Role { get; set; } = RoleTypeId.NtfPrivate;
+        base.AddRole(player);
+    }
+    public override RoleTypeId Role { get; set; } = RoleTypeId.NtfSergeant;
 
     public override int MaxHealth { get; set; } = 100;
     public override Broadcast Broadcast { get; set; } = new Broadcast()
@@ -32,7 +40,7 @@ public class Silencer : CustomRole, ICustomRole
         Type = global::Broadcast.BroadcastFlags.Normal,
     };
 
-    public RoleTypeId RoleToBe { get; set; } = RoleTypeId.NtfPrivate;
+    public RoleTypeId RoleToBe { get; set; } = RoleTypeId.NtfSergeant;
 
 
     public override string Name { get; set; } = "Nine-Tailed Fox Silencer";

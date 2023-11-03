@@ -17,15 +17,23 @@ using Player = Exiled.Events.Handlers.Player;
 [CustomRole(RoleTypeId.NtfPrivate)]
 public class Medic : CustomRole, ICustomRole
 {
-    public int Chance { get; set; } = 0;
-    public RoleTypeId RoleToBe { get; set; } = RoleTypeId.NtfPrivate;
+    public int Chance { get; set; } = 65;
+    public RoleTypeId RoleToBe { get; set; } = RoleTypeId.NtfCaptain;
 
-    public StartTeam StartTeam { get; set; } = StartTeam.Ntf;
+    public StartTeam StartTeam { get; set; } = StartTeam.Captain;
 
     public override uint Id { get; set; } = 25;
     public override bool KeepInventoryOnSpawn { get; set; } = false;
+    public override void AddRole(Exiled.API.Features.Player player)
+    {
+        if (player.Role != Role)
+        {
+            return;
+        }
 
-    public override RoleTypeId Role { get; set; } = RoleTypeId.NtfPrivate;
+        base.AddRole(player);
+    }
+    public override RoleTypeId Role { get; set; } = RoleTypeId.NtfCaptain;
 
     public override int MaxHealth { get; set; } = 100;
 

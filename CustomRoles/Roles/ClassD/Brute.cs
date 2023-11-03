@@ -5,8 +5,10 @@ using CustomRoles.API;
 using Exiled.API.Enums;
 using Exiled.API.Features;
 using Exiled.API.Features.Attributes;
+using Exiled.API.Features.Doors;
 using Exiled.API.Features.Spawn;
 using Exiled.CustomRoles.API.Features;
+using Exiled.Events.EventArgs.Player;
 using Exiled.Events.EventArgs.Scp330;
 using MEC;
 using PlayerRoles;
@@ -16,32 +18,43 @@ using UnityEngine;
 [CustomRole(RoleTypeId.ClassD)]
 public class Brute : CustomRole, ICustomRole
 {
-    public int Chance { get; set; } = 60;
+    public int Chance { get; set; } = 80;
     public RoleTypeId RoleToBe { get; set; } = RoleTypeId.ClassD;
     public StartTeam StartTeam { get; set; } = StartTeam.ClassD;
 
-    public override uint Id { get; set; } = 10;
+    public bool CooldownActive = false;
+    public bool AbilityReady = false;
+    
+    public override uint Id { get; set; } = 11;
 
     public override RoleTypeId Role { get; set; } = RoleTypeId.ClassD;
 
     public override int MaxHealth { get; set; } = 120;
 
-    public override string Name { get; set; } = "Brute";
-    public override Broadcast Broadcast { get; set; } = new Broadcast()
-    {
-        Content = "You have been spawned in as <color=#EE7600><b>Class D Personnel:</b></color> <color=#2bad33><b>Brute</b></color><br><i>There has been a containment breach at the site.</i><br><i>Lead the D-Boi army out of the facility!</i>\r\n",
-        Duration = 10,
-        Show = true,
-        Type = global::Broadcast.BroadcastFlags.Normal,
-    };
-    public override string Description { get; set; } =
-        "<color=#2bad33><b>Brute</b></color>";
+    public override string Name { get; set; } = "<color=#f8b200><b>D-0420 Brute</b></color>";
+    public override bool DisplayCustomItemMessages { get; set; } = false;
 
-    public override string CustomInfo { get; set; } = "Brute";
+    public override string Description { get; set; } =
+        "The Class D that spawns with some stolen goods and armour from a weak cell guard earlier. Use these items to lead yourself and fellow Class D to victory!";
+
+    protected override void SubscribeEvents()
+    {
+        Exiled.Events.Handlers.Player.InteractingDoor += InteractingWithGates;
+        Exiled.Events.Handlers.Player.TogglingNoClip += NoClipActive;
+        base.SubscribeEvents();
+    }
+
+    protected override void UnsubscribeEvents()
+    {
+        Exiled.Events.Handlers.Player.InteractingDoor -= InteractingWithGates;
+        Exiled.Events.Handlers.Player.TogglingNoClip -= NoClipActive;
+        base.UnsubscribeEvents();
+    }
+    public override string CustomInfo { get; set; } = "Brute D-0420";
 
     public override bool KeepInventoryOnSpawn { get; set; } = false;
 
-    public override bool KeepRoleOnDeath { get; set; } = true;
+    public override bool KeepRoleOnDeath { get; set; } = false;
 
     public override bool RemovalKillsPlayer { get; set; } = false;
 
@@ -54,14 +67,11 @@ public class Brute : CustomRole, ICustomRole
 
     public override List<string> Inventory { get; set; } = new()
     {
-        "Makeshit COM-10",
-        $"{ItemType.Coin}",
         $"{ItemType.Coin}",
         $"{ItemType.Coin}",
         $"{ItemType.ArmorLight}",
         $"{ItemType.KeycardJanitor}",
-        $"{ItemType.Painkillers}",
-
+        $"{ItemType.Flashlight}",
     };
 
     public override Dictionary<AmmoType, ushort> Ammo { get; set; } = new()
@@ -73,15 +83,57 @@ public class Brute : CustomRole, ICustomRole
     };
     protected override void RoleAdded(Player player)
     {
-        Effect e = new Effect();
-        e.Type = Exiled.API.Enums.EffectType.DamageReduction;
-        e.Intensity = 2;
-        player.EnableEffect(e);
-    }
 
-    protected override void RoleRemoved(Player player)
+        Timing.CallDelayed(1f, () =>
+        {
+            player.Scale = new Vector3(1f, 1.1f, 1f);
+            Effect e = new Effect();
+            e.Type = EffectType.DamageReduction;
+            e.Intensity = 15;
+            player.EnableEffect(e);
+
+        });
+
+    }
+    
+    public void NoClipActive(TogglingNoClipEventArgs ev)
     {
-        player.DisableAllEffects();
-    }
+        if (!Check(ev.Player))
+            return;
+        if (CooldownActive)
+        {
+            ev.Player.ShowHint("<align=center>You can pry open a giant gate in less than 30 seconds.</align>", 5);
+            return;
+        }
+        if (AbilityReady)
+        {
+            ev.Player.ShowHint("<align=center>You have deactivated the ability to open a giant gate, but you can reactivate it.</align>", 5);
 
+            AbilityReady = false;
+            return;
+        }
+        ev.Player.ShowHint("<align=center>You can now pry open a giant gate.</align>", 5);
+
+        ev.IsAllowed = false;
+        AbilityReady = true;
+    }
+    public void InteractingWithGates(InteractingDoorEventArgs ev)
+    {
+        
+        if (ev.Door.IsGate && Check(ev.Player) && CooldownActive == false && AbilityReady == true)
+        {
+            Gate g = (Gate)ev.Door;
+            if (g.Room.Type == RoomType.Hcz079)
+                return;
+
+            g.TryPry(ev.Player);
+            CooldownActive = true;
+            AbilityReady = false;
+            
+            Timing.CallDelayed(30f, () =>
+            {
+                CooldownActive = false;
+            });
+        }
+    }
 }

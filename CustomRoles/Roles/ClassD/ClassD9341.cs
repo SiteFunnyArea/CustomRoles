@@ -20,16 +20,17 @@ public class ClassD9341 : CustomRole, ICustomRole
     public RoleTypeId RoleToBe { get; set; } = RoleTypeId.ChaosConscript;
     public StartTeam StartTeam { get; set; } = StartTeam.ClassD;
 
-    public override uint Id { get; set; } = 11;
+    public override uint Id { get; set; } = 12;
 
     public override RoleTypeId Role { get; set; } = RoleTypeId.ChaosConscript;
 
     public override int MaxHealth { get; set; } = 100;
+    public override bool DisplayCustomItemMessages { get; set; } = false;
 
     public override string Name { get; set; } = "Class D-9341";
     public override Broadcast Broadcast { get; set; } = new Broadcast()
     {
-        Content = "You have been spawned in as <color=#EE7600><b>Class D Personnel:</b></color> <color=#EFC01A><b>D-9341</b></color><br><i>Back at Site -- once again, D-9341...</i><br><i>Rescue any Class D Personnel and get your revenge.</i>\r\n",
+        Content = "You have been spawned in as <color=#f8b200><b>Class D Personnel:</b></color> <color=#EFC01A><b>D-9341</b></color><br><i>Back at Site -- once again, D-9341...</i><br><i>Rescue any Class D Personnel and get your revenge.</i>\r\n",
         Duration = 10,
         Show = true,
         Type = global::Broadcast.BroadcastFlags.Normal,

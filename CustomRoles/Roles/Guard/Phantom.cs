@@ -27,6 +27,7 @@ public class Phantom : CustomRole, ICustomRole
     public override int MaxHealth { get; set; } = 120;
 
     public override string Name { get; set; } = "Chaos Phantom";
+    public override bool DisplayCustomItemMessages { get; set; } = false;
 
     public override string Description { get; set; } =
         "A Chaos Insurgency outfitted with an active-camo suit that allows them to go invisible at will.\n\nUse the Client console command \".special\" to activate this ability. This can be keybound with \"cmdbind KEY .special\"";

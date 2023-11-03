@@ -15,15 +15,15 @@ using UnityEngine;
 [CustomRole(RoleTypeId.NtfPrivate)]
 public class Sniper : CustomRole, ICustomRole
 {
-    public int Chance { get; set; } = 0;
+    public int Chance { get; set; } = 100;
 
-    public StartTeam StartTeam { get; set; } = StartTeam.Ntf;
+    public StartTeam StartTeam { get; set; } = StartTeam.Sergeant;
     public override bool KeepInventoryOnSpawn { get; set; } = false;
 
     public override uint Id { get; set; } = 27;
-    public RoleTypeId RoleToBe { get; set; } = RoleTypeId.NtfPrivate;
+    public RoleTypeId RoleToBe { get; set; } = RoleTypeId.NtfSergeant;
 
-    public override RoleTypeId Role { get; set; } = RoleTypeId.NtfPrivate;
+    public override RoleTypeId Role { get; set; } = RoleTypeId.NtfSergeant;
 
     public override int MaxHealth { get; set; } = 100;
     public override Broadcast Broadcast { get; set; } = new Broadcast()
@@ -38,7 +38,15 @@ public class Sniper : CustomRole, ICustomRole
     public override string Description { get; set; } =
         "You have spawned as a custom class.<br><color=#71afff><b>Nine-Tailed Fox Sniper</b></color>\r\n";
     public override string CustomInfo { get; set; } = "Nine-Tailed Fox Sniper";
+    public override void AddRole(Player player)
+    {
+        if (player.Role != Role)
+        {
+            return;
+        }
 
+        base.AddRole(player);
+    }
     public override bool KeepRoleOnDeath { get; set; } = false;
 
     public override bool RemovalKillsPlayer { get; set; } = false;

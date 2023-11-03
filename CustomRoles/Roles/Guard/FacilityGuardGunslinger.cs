@@ -17,36 +17,42 @@ using Player = Exiled.Events.Handlers.Player;
 [CustomRole(RoleTypeId.FacilityGuard)]
 public class FacilityGuardGunslinger : CustomRole, ICustomRole
 {
-    public int Chance { get; set; } = 40;
+    public int Chance { get; set; } = 80;
+    protected override void SubscribeEvents()
+    {
+        Player.Hurting += Hurt;
+        base.SubscribeEvents();
+    }
+
+    protected override void UnsubscribeEvents()
+    {
+        Player.Hurting -= Hurt;
+        base.UnsubscribeEvents();
+    }
     public RoleTypeId RoleToBe { get; set; } = RoleTypeId.FacilityGuard;
 
     public StartTeam StartTeam { get; set; } = StartTeam.Guard;
 
-    public override uint Id { get; set; } = 17;
+    public override uint Id { get; set; } = 2511;
 
     public override RoleTypeId Role { get; set; } = RoleTypeId.FacilityGuard;
 
-    public override int MaxHealth { get; set; } = 100;
+    public override int MaxHealth { get; set; } = 110;
 
-    public override string Name { get; set; } = "Facility Guard Gunslinger";
+    public override string Name { get; set; } = "<color=#727472><b>Facility Guard Gunslinger</b></color>";
 
     public override string Description { get; set; } =
-        "<color=#2bad33><b>Gunslinger</b></color>";
+        "You spawn with <color=#FFEA00>two extra weapons</color> and <color=#FFEA00>better armour</color>. You can tank a bit of shots and deal extra damage to <color=#EE7600>Rogue Class D Personnel</color> and <color=#228B22>Chaos Insurgency</color>.\r\n";
     public override bool KeepInventoryOnSpawn { get; set; } = false;
 
-    public override string CustomInfo { get; set; } = "Facility Guard Gunslinger";
-    public override Broadcast Broadcast { get; set; } = new Broadcast()
-    {
-        Content = "You have been spawned in as <color=#727472><b>Facility Guard:</b></color> <color=#2bad33><b>Gunslinger</b></color><br><i>There has been a containment breach at the site.</i><br><i>Provide combative support with all your fine weaponry.</i>\r\n[4:27 PM]\r\n",
-        Duration = 10,
-        Show = true,
-        Type = global::Broadcast.BroadcastFlags.Normal,
-    };
+    public override string CustomInfo { get; set; } = "Gunslinger";
+    public override bool DisplayCustomItemMessages { get; set; } = false;
+
     public override List<string> Inventory { get; set; } = new()
     {
-        $"{ItemType.GunAK}",
-        $"{ItemType.GrenadeFlash}",
-        $"{ItemType.GunShotgun}",
+        $"{ItemType.GunRevolver}",
+        $"{ItemType.GunCrossvec}",
+        $"{ItemType.GunA7}",
         $"{ItemType.Medkit}",
         $"{ItemType.Radio}",
         $"{ItemType.ArmorHeavy}",
@@ -60,8 +66,12 @@ public class FacilityGuardGunslinger : CustomRole, ICustomRole
             60
         },
         {
-            AmmoType.Ammo12Gauge,
-            42
+            AmmoType.Nato9,
+            60
+        },
+        {
+            AmmoType.Ammo44Cal,
+            16
         },
     };
 
@@ -82,4 +92,12 @@ public class FacilityGuardGunslinger : CustomRole, ICustomRole
     {
         //new HealingMist(),
     };
+
+    public void Hurt(HurtingEventArgs e)
+    {
+        if(e.Attacker.Role.Team == Team.ChaosInsurgency || e.Attacker.Role.Team == Team.ClassD)
+        {
+            e.Amount = e.Amount * 1.15f;
+        }
+    }
 }

@@ -17,37 +17,33 @@ using Player = Exiled.Events.Handlers.Player;
 [CustomRole(RoleTypeId.FacilityGuard)]
 public class FacilityGuardMedic : CustomRole, ICustomRole
 {
-    public int Chance { get; set; } = 60;
+    public int Chance { get; set; } = 75;
     public RoleTypeId RoleToBe { get; set; } = RoleTypeId.FacilityGuard;
 
     public StartTeam StartTeam { get; set; } = StartTeam.Guard;
     public override bool KeepInventoryOnSpawn { get; set; } = false;
 
-    public override uint Id { get; set; } = 18;
+    public override uint Id { get; set; } = 2512;
 
     public override RoleTypeId Role { get; set; } = RoleTypeId.FacilityGuard;
 
-    public override int MaxHealth { get; set; } = 100;
+    public override int MaxHealth { get; set; } = 110;
 
-    public override string Name { get; set; } = "Facility Guard Medic";
+    public override string Name { get; set; } = "<color=#727472><b>Facility Guard Medic</b></color>";
 
     public override string Description { get; set; } =
-        "You have spawned as a custom class.<br><color=#727472><b>Facility Guard:</b></color> <color=#2bad33><b>Medic</b></color>";
+        "You spawn with a <color=#FFEA00>Standard Medic Gun</color> that can heal zombies back to the <color=#005EBC>Foundation Team</color>. As well as some extra <color=#FFEA00>Medical Gear.</color>";
+    public override bool DisplayCustomItemMessages { get; set; } = false;
 
-    public override string CustomInfo { get; set; } = "Facility Guard Medic";
-    public override Broadcast Broadcast { get; set; } = new Broadcast()
-    {
-        Content = "You have been spawned in as <color=#727472><b>Facility Guard:</b></color> <color=#2bad33><b>Medic</b></color><br><i>There has been a containment breach at the site.</i><br><i>Provide healing support with your healing gun.</i>\r\n",
-        Duration = 10,
-        Show = true,
-        Type = global::Broadcast.BroadcastFlags.Normal,
-    };
+    public override string CustomInfo { get; set; } = "Medic";
+
     public override List<string> Inventory { get; set; } = new()
     {
-        $"{ItemType.GunCrossvec}",
-        "MG-119",
+        $"{ItemType.GunFSP9}",
+        "Standard Medic Gun",
         $"{ItemType.Medkit}",
         $"{ItemType.Medkit}",
+        $"Injection-HP",
         $"{ItemType.Radio}",
         $"{ItemType.ArmorLight}",
         $"{ItemType.KeycardGuard}",

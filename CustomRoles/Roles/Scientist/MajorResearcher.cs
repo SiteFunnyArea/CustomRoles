@@ -14,24 +14,24 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CustomRole(RoleTypeId.Scientist)]
-public class ContainmentEngineer : CustomRole, ICustomRole
+public class MajorResearcher : CustomRole, ICustomRole
 {
-    public int Chance { get; set; } = 80;
+    public int Chance { get; set; } = 100;
     public RoleTypeId RoleToBe { get; set; } = RoleTypeId.Scientist;
     public StartTeam StartTeam { get; set; } = StartTeam.Scientist;
 
-    public override uint Id { get; set; } = 2500;
+    public override uint Id { get; set; } = 2501;
 
     public override RoleTypeId Role { get; set; } = RoleTypeId.Scientist;
 
-    public override int MaxHealth { get; set; } = 110;
+    public override int MaxHealth { get; set; } = 120;
 
-    public override string Name { get; set; } = "<color=#FAFF86><b>Scientist Containment Engineer</b></color>";
+    public override string Name { get; set; } = "<color=#FAFF86><b>Scientist Major Researcher</b></color>";
     public override string Description { get; set; } =
-        "You spawn with a <color=#FFEA00>SCP 268-TP</color> and <color=#FFEA00>SCP 127-HP</color>. These modified SCP specialize in both situations of combat and quick escape. \r\n>";
+        "You spawn with spare <color=#FFEA00>SCP Objects</color> and a modified <color=#FFEA00>Injection-S</color>. This class specializes in escaping as quickly as possible and getting out of close calls.";
+    
+    public override string CustomInfo { get; set; } = "Major Researcher";
     public override bool DisplayCustomItemMessages { get; set; } = false;
-
-    public override string CustomInfo { get; set; } = "Containment Engineer";
 
     public override bool KeepInventoryOnSpawn { get; set; } = false;
 
@@ -55,12 +55,12 @@ public class ContainmentEngineer : CustomRole, ICustomRole
 
     public override List<string> Inventory { get; set; } = new()
     {
-        $"{ItemType.KeycardContainmentEngineer}",
-        $"SCP 268-TP",
-        $"SCP 127-HP",
+        $"{ItemType.KeycardResearchCoordinator}",
+        $"{ItemType.SCP207}",
+        $"Injection-S",
+        $"{ItemType.SCP500}",
         $"{ItemType.Medkit}",
         $"{ItemType.Radio}",
-        $"{ItemType.Coin}",
 
     };
 
